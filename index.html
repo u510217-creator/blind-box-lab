@@ -3,23 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>盲盒研究所｜消費心理與行為調查</title>
+<meta name="theme-color" content="#f7faf8">
+<title>盲盒研究所｜消費心理與消費行為調查</title>
 <style>
-:root{--ink:#28343a;--muted:#718087;--paper:#f7faf8;--card:#fff;--line:#e2ebe6;--mint:#dcefe7;--green:#477e6b;--peach:#f8e9df;--shadow:0 14px 40px rgba(47,77,65,.08)}
-*{box-sizing:border-box} body{margin:0;background:linear-gradient(145deg,#f7faf8,#f4f8fb);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Noto Sans TC",sans-serif;line-height:1.65}
-.wrap{max-width:760px;margin:auto;padding:28px 18px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;color:var(--muted);font-size:13px;letter-spacing:.08em}
-.brand{font-weight:700;color:var(--green);letter-spacing:.12em}.hero{padding:34px 30px;border-radius:28px;background:linear-gradient(120deg,#e8f4ee,#f7eee8);box-shadow:var(--shadow);margin-bottom:22px}
-.kicker{font-size:12px;letter-spacing:.16em;color:var(--green);font-weight:700}.hero h1{font-size:clamp(28px,6vw,42px);line-height:1.2;margin:12px 0}.hero p{color:#5d6d6a;margin:10px 0 0}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--shadow)}
-.progressrow{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:9px}.track{height:7px;border-radius:20px;background:#edf2ef;overflow:hidden;margin-bottom:25px}.bar{height:100%;width:0;background:var(--green);transition:width .25s}
-h2{font-size:22px;margin:0 0 7px}.hint{color:var(--muted);font-size:14px;margin:0 0 22px}.field{margin:22px 0}.field label.title{display:block;font-weight:650;margin-bottom:10px}.required{color:#b66d53;font-size:12px;margin-left:5px}
-.options{display:grid;gap:9px}.opt{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:14px;cursor:pointer;transition:.15s;background:#fff}.opt:hover{border-color:#a9cbbb;background:#fbfdfc}.opt input{accent-color:var(--green);margin-top:5px}.opt span{flex:1}
-select,input[type=text]{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);font:inherit}
-.actions{display:flex;justify-content:space-between;gap:12px;margin-top:26px}.btn{border:0;border-radius:14px;padding:12px 20px;font:inherit;font-weight:650;cursor:pointer}.primary{background:var(--green);color:#fff}.secondary{background:#eef4f0;color:#52645d}.btn:disabled{opacity:.4;cursor:not-allowed}
-.notice{font-size:12px;color:var(--muted);margin-top:20px}.tag{display:inline-block;background:var(--mint);color:var(--green);padding:5px 11px;border-radius:30px;font-size:12px;font-weight:700}
-.result{padding:22px;border-radius:18px;background:linear-gradient(135deg,#eaf5ef,#fbf1e9);margin:18px 0}.result h3{font-size:25px;margin:7px 0}.small{font-size:13px;color:var(--muted)}.hidden{display:none!important}
-footer{text-align:center;color:#91a09a;font-size:12px;margin-top:24px}
-@media(max-width:520px){.wrap{padding:18px 12px 40px}.hero{padding:26px 22px}.panel{padding:21px 17px}.actions .btn{flex:1}}
+:root{--ink:#28343a;--muted:#718087;--paper:#f7faf8;--card:#fff;--line:#e2ebe6;--mint:#dcefe7;--green:#477e6b;--green-dark:#356553;--peach:#f8e9df;--shadow:0 14px 40px rgba(47,77,65,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(145deg,#f7faf8,#f4f8fb);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Noto Sans TC",sans-serif;line-height:1.65}
+.wrap{max-width:780px;margin:auto;padding:26px 18px 58px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px;color:var(--muted);font-size:13px;letter-spacing:.06em}.brand{font-weight:800;color:var(--green);letter-spacing:.12em}.hero{padding:34px 30px;border-radius:28px;background:linear-gradient(120deg,#e8f4ee,#f7eee8);box-shadow:var(--shadow);margin-bottom:20px}.kicker{font-size:12px;letter-spacing:.16em;color:var(--green);font-weight:800}.hero h1{font-size:clamp(29px,6vw,42px);line-height:1.2;margin:10px 0}.hero p{color:#5d6d6a;margin:8px 0 0}.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+.progressrow{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:9px}.track{height:7px;border-radius:20px;background:#edf2ef;overflow:hidden;margin-bottom:24px}.bar{height:100%;width:0;background:var(--green);transition:width .25s}h2{font-size:22px;margin:0 0 7px}.hint{color:var(--muted);font-size:14px;margin:0 0 20px}.field{margin:23px 0}.field label.title{display:block;font-weight:700;margin-bottom:10px}.required{color:#b66d53;font-size:12px;margin-left:6px;font-weight:500}.subhint{font-size:12px;color:var(--muted);margin:-5px 0 10px}
+.options{display:grid;gap:9px}.opt{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .15s,background .15s,transform .15s;background:#fff;min-height:48px}.opt:hover{border-color:#a9cbbb;background:#fbfdfc}.opt:has(input:checked){border-color:var(--green);background:#f0f7f3}.opt input{accent-color:var(--green);margin-top:5px;flex:0 0 auto}.opt span{flex:1}.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.choice-grid .opt{align-items:center}.choice-grid .opt input{margin-top:0}
+.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.scale label{border:1px solid var(--line);border-radius:13px;padding:10px 5px;text-align:center;cursor:pointer;font-size:13px;min-height:62px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px}.scale label:has(input:checked){border-color:var(--green);background:#eff7f2;color:var(--green-dark);font-weight:700}.scale input{accent-color:var(--green);margin:0}.scale .scale-text{line-height:1.3}.rangebox{padding:16px;border:1px solid var(--line);border-radius:16px;background:#fbfdfc}.rangehead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.rangevalue{font-size:22px;font-weight:800;color:var(--green)}input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}.rangescale{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:4px}
+select,input[type=text],textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);font:inherit}.actions{display:flex;justify-content:space-between;gap:12px;margin-top:26px}.btn{border:0;border-radius:14px;padding:12px 20px;font:inherit;font-weight:700;cursor:pointer;min-height:46px}.primary{background:var(--green);color:#fff}.primary:hover{background:var(--green-dark)}.secondary{background:#eef4f0;color:#52645d}.btn:disabled{opacity:.4;cursor:not-allowed}.notice{font-size:12px;color:var(--muted);margin-top:18px}.tag{display:inline-block;background:var(--mint);color:var(--green);padding:5px 11px;border-radius:30px;font-size:12px;font-weight:800}.result{padding:20px;border-radius:18px;background:linear-gradient(135deg,#eaf5ef,#fbf1e9);margin:18px 0}.result h3{font-size:23px;margin:6px 0}.small{font-size:13px;color:var(--muted)}.hidden{display:none!important}.branch-note{background:#f7f8f4;border-left:3px solid #a8c7b5;border-radius:0 12px 12px 0;padding:11px 13px;font-size:13px;color:#5e7068;margin:14px 0}.section-chip{display:inline-block;font-size:11px;letter-spacing:.08em;color:var(--green);background:#eff6f1;padding:4px 9px;border-radius:20px;margin-bottom:10px}footer{text-align:center;color:#91a09a;font-size:12px;margin-top:24px}
+@media(max-width:520px){.wrap{padding:17px 12px 38px}.hero{padding:26px 21px}.panel{padding:21px 16px}.actions .btn{flex:1}.choice-grid{grid-template-columns:1fr}.scale{gap:4px}.scale label{font-size:11px;padding:8px 2px;min-height:64px}}
 </style>
 </head>
 <body>
@@ -33,7 +27,7 @@ footer{text-align:center;color:#91a09a;font-size:12px;margin-top:24px}
   </section>
   <main class="panel">
     <div id="survey">
-      <div class="progressrow"><span id="stepLabel">第 1 部分</span><span id="stepCount">1 / 4</span></div>
+      <div class="progressrow"><span id="stepLabel">基本資料</span><span id="stepCount">1 / 3</span></div>
       <div class="track"><div class="bar" id="bar"></div></div>
       <div id="content"></div>
       <div class="actions"><button class="btn secondary" id="back" type="button">上一步</button><button class="btn primary" id="next" type="button">下一步</button></div>
@@ -42,8 +36,8 @@ footer{text-align:center;color:#91a09a;font-size:12px;margin-top:24px}
     <div id="done" class="hidden">
       <span class="tag">完成填答</span>
       <h2 style="margin-top:14px">謝謝你參與研究！</h2>
-      <div class="result"><div class="small">你的情境選擇傾向（趣味分類，非心理測驗）</div><h3 id="typeTitle">驚喜探索型</h3><p id="typeText"></p></div>
-      <p>這是目前的網頁原型。正式公開收件前，還需要接上共同資料庫，讓每位填答者的答案都能集中保存。</p>
+      <div class="result"><div class="small">填答完成</div><h3>你的回答已整理完成</h3><p id="typeText">感謝你提供寶貴意見。這些回答將協助我們了解不同購買經驗者對盲盒的看法。</p></div>
+      <p class="small">目前是網站測試版：答案尚未傳送至研究團隊的共同資料庫。正式公開收件前，必須完成雲端資料庫設定與測試。</p>
       <button class="btn secondary" id="restart" type="button">重新體驗</button>
     </div>
   </main>
@@ -54,92 +48,55 @@ const steps = [
  {title:"基本資料",desc:"先了解填答者的基本背景。",fields:[
   {id:"age",q:"你的年齡層是？",type:"radio",opts:["未滿 15 歲","15–17 歲","18–24 歲","25–34 歲","35 歲以上"]},
   {id:"gender",q:"你的性別是？",type:"radio",opts:["男","女","其他／自我描述","不願透露"]},
-  {id:"bought",q:"你曾經購買過盲盒嗎？",type:"radio",opts:["有","沒有"]}
+  {id:"bought",q:"你的盲盒購買經驗比較接近哪一種？",type:"radio",style:"cards",opts:["有，目前仍會購買","有，以前會買，但現在不買了","沒有，從來沒買過"]},
+  {id:"monthlyMoney",q:"你每月可支配的金額大約是多少？",type:"radio",opts:["500 元以下","501–1,000 元","1,001–2,000 元","2,001–3,000 元","3,001–5,000 元","5,001 元以上","不固定／不方便透露"]},
+  {id:"entertainmentRatio",q:"你每月會將多少比例的可支配金額花在娛樂上？",type:"range",min:0,max:100,step:5,unit:"%",help:"娛樂支出包含盲盒、遊戲、影音平台、休閒活動等。請估計大約比例。"}
  ]},
  {title:"購買經驗",desc:"依照你的購買經驗回答以下題目。",branch:true,
-  buyer:[
-   {id:"category",q:"你通常購買哪種類型的盲盒？",type:"check",opts:["公仔／模型","玩偶／吊飾","文具","生活用品","其他"]},
-   {id:"frequency",q:"你購買盲盒的頻率大約是？",type:"radio",opts:["每週至少一次","每月幾次","每季幾次","一年幾次","偶爾／很久才一次"]},
+  current:[
+   {id:"category",q:"你通常購買哪種類型的盲盒？（可複選）",type:"check",opts:["公仔／模型","玩偶／吊飾","文具","生活用品","其他"]},
+   {id:"frequency",q:"過去三個月，你平均多久購買一次盲盒？",type:"frequency",opts:["從未","每月不到一次","每月 1–3 次","每週 1–2 次","每週 3 次以上"]},
    {id:"budget",q:"你通常單次購買盲盒的花費約為？",type:"radio",opts:["未滿 100 元","100–299 元","300–599 元","600–999 元","1,000 元以上","不固定／不確定"]},
    {id:"motivation",q:"你購買盲盒的主要原因有哪些？（可複選）",type:"check",opts:["喜歡角色或 IP","外觀設計吸引","享受拆盒的驚喜感","收藏或想湊齊系列","朋友推薦／陪朋友購買","受到社群或開箱內容影響","其他"]},
    {id:"target",q:"購買前，你通常有特別想要的款式嗎？",type:"radio",opts:["有明確想要的款式","有偏好的款式，但也能接受其他款","沒有特定目標，想享受驚喜"]},
    {id:"duplicate",q:"如果抽到已經擁有的重複款，你通常會？",type:"radio",opts:["停止購買","再買一次試試","和別人交換／轉售／送人","覺得沒關係，享受拆盒過程","視情況而定"]},
-   {id:"overbudget",q:"你曾因為想抽到特定款式而超出原本預算嗎？",type:"radio",opts:["經常","偶爾","從不","不適用／不確定"]},
-   {id:"regret",q:"購買盲盒後，你曾感到後悔嗎？",type:"radio",opts:["經常","偶爾","很少","從不"]}
+   {id:"overbudget",q:"你曾因為想抽到特定款式而超出原本預算嗎？",type:"likertFrequency",opts:["從不","很少","有時","經常","非常頻繁"]},
+   {id:"regret",q:"購買盲盒後，你曾感到後悔嗎？",type:"likertFrequency",opts:["從不","很少","有時","經常","非常頻繁"]}
   ],
-  nonbuyer:[
-   {id:"reason",q:"你沒有購買盲盒的主要原因有哪些？（可複選）",type:"check",opts:["價格偏高","不喜歡款式隨機","沒有喜歡的角色或商品","擔心抽到不喜歡的款式","對盲盒沒有興趣","其他"]},
-   {id:"intent",q:"你未來購買盲盒的意願如何？",type:"radio",opts:["非常有意願","有一些意願","普通／不確定","沒有意願"]},
-   {id:"trigger",q:"哪些因素可能提高你購買盲盒的意願？（可複選）",type:"check",opts:["遇到喜歡的角色或 IP","價格較便宜","可以直接選擇款式","朋友推薦","限量或特殊款","更了解商品內容","目前沒有因素會提高意願"]},
-   {id:"direct",q:"如果能直接選擇自己想要的款式，你會比較願意購買嗎？",type:"radio",opts:["會","不會","不確定"]}
+  former:[
+   {id:"pastCategory",q:"你以前通常購買哪種類型的盲盒？（可複選）",type:"check",opts:["公仔／模型","玩偶／吊飾","文具","生活用品","其他","不記得／不確定"]},
+   {id:"pastFrequency",q:"以前購買盲盒的頻率大約是？",type:"radio",opts:["每週至少一次","每月幾次","每季幾次","一年幾次","偶爾／很久才一次"]},
+   {id:"stopReason",q:"你停止購買盲盒的主要原因有哪些？（可複選）",type:"check",opts:["價格太高","對系列或角色失去興趣","沒有喜歡的新款式／IP","重複款太多或常抽不到想要的款式","覺得不值得花這筆錢","想控制支出","其他"]},
+   {id:"restart",q:"哪些因素可能讓你重新考慮購買盲盒？（可複選）",type:"check",opts:["推出喜歡的角色或 IP","價格降低","可以直接選擇款式","朋友推薦","推出限定或特殊款","目前沒有因素會讓我重新購買","其他"]},
+   {id:"pastRegret",q:"以前購買盲盒後，你曾感到後悔嗎？",type:"likertFrequency",opts:["從不","很少","有時","經常","非常頻繁"]}
+  ],
+  never:[
+   {id:"neverReason",q:"你從未購買盲盒的主要原因有哪些？（可複選）",type:"check",opts:["價格偏高","不喜歡款式隨機","沒有喜歡的角色或商品","擔心抽到不喜歡的款式","對盲盒沒有興趣","其他"]},
+   {id:"intent",q:"你未來購買盲盒的意願如何？",type:"likertAgreement",opts:["完全不願意","不太願意","普通／不確定","有些願意","非常願意"]},
+   {id:"trigger",q:"哪些因素可能提高你購買盲盒的意願？（可複選）",type:"check",opts:["遇到喜歡的角色或 IP","價格較便宜","可以直接選擇款式","朋友推薦","限量或特殊款","更了解商品內容","目前沒有因素會提高意願"]}
   ]
  },
- {title:"共同看法與情境",desc:"以下題目不論是否買過盲盒，都可以回答。",fields:[
-  {id:"social",q:"朋友推薦、網紅開箱或社群熱門話題，會影響你對盲盒的興趣或購買意願嗎？",type:"radio",opts:["影響很大","有一些影響","影響不大","完全不影響","不確定"]},
+ {title:"共同看法與情境",desc:"以下題目不論是否買過盲盒，都可以回答。請依照自己的真實想法選擇。",fields:[
+  {id:"social",q:"朋友推薦、網紅開箱或社群熱門話題，會影響你對盲盒的興趣或購買意願。",type:"likertAgreement",opts:["非常不同意","不同意","普通","同意","非常同意"]},
+  {id:"randomness",q:"我認為盲盒「無法事先確定款式」是吸引人的特色。",type:"likertAgreement",opts:["非常不同意","不同意","普通","同意","非常同意"]},
+  {id:"priceValue",q:"我會在意盲盒的價格是否符合商品本身的價值。",type:"likertAgreement",opts:["非常不同意","不同意","普通","同意","非常同意"]},
   {id:"scenario1",q:"情境一｜朋友很喜歡某個盲盒系列，邀請你一起購買。你會怎麼做？",type:"radio",opts:["因為朋友推薦而想買","先了解商品，再決定","願意陪朋友，但不一定自己買","不會因此改變想法"]},
   {id:"scenario2",q:"情境二｜某系列推出稀有隱藏款。你的反應比較接近哪一種？",type:"radio",opts:["會因此更想嘗試","有興趣，但不會特別追求","不太在意稀有款","不確定／視商品而定"]},
   {id:"scenario3",q:"情境三｜你很喜歡某系列，但只差一款就能集齊。你會怎麼做？",type:"radio",opts:["願意繼續購買碰碰運氣","先設定預算，再決定是否繼續","考慮交換或購買指定款","不會為了集齊而繼續購買","不確定"]}
  ]}
 ];
-let page=0, answers={};
-const content=document.getElementById("content"), bar=document.getElementById("bar");
-function currentFields(){
- if(page===1) return answers.bought==="有"?steps[1].buyer:steps[1].nonbuyer;
- return steps[page].fields;
-}
-function render(){
- const s=steps[page], fields=currentFields();
- document.getElementById("stepLabel").textContent=s.title;
- document.getElementById("stepCount").textContent=(page+1)+" / "+steps.length;
- bar.style.width=((page+1)/steps.length*100)+"%";
- content.innerHTML=`<h2>${s.title}</h2><p class="hint">${s.desc}</p>`;
- fields.forEach(f=>{
-  const wrap=document.createElement("div");wrap.className="field";
-  const label=document.createElement("label");label.className="title";label.textContent=f.q;
-  const req=document.createElement("span");req.className="required";req.textContent="必填";label.appendChild(req);wrap.appendChild(label);
-  const opts=document.createElement("div");opts.className="options";
-  f.opts.forEach(opt=>{
-   const row=document.createElement("label");row.className="opt";
-   const input=document.createElement("input");input.type=f.type==="check"?"checkbox":"radio";input.name=f.id;input.value=opt;
-   const old=answers[f.id];input.checked=f.type==="check"?(old||[]).includes(opt):old===opt;
-   input.addEventListener("change",()=>{
-    if(f.type==="check"){const vals=[...opts.querySelectorAll("input:checked")].map(x=>x.value);answers[f.id]=vals}
-    else answers[f.id]=opt;
-   });
-   const text=document.createElement("span");text.textContent=opt;row.append(input,text);opts.appendChild(row);
-  });wrap.appendChild(opts);content.appendChild(wrap);
- });
- document.getElementById("back").disabled=page===0;
- document.getElementById("next").textContent=page===steps.length-1?"完成填答":"下一步";
-}
-function validate(){
- for(const f of currentFields()){
-  const a=answers[f.id];if(!a||(Array.isArray(a)&&a.length===0)){alert("請完成這一頁的所有題目再繼續喔！");return false}
- }
- return true;
-}
-document.getElementById("back").onclick=()=>{if(page>0){page--;render()}};
-document.getElementById("next").onclick=()=>{
- if(!validate())return;
- if(page<steps.length-1){page++;render();window.scrollTo({top:0,behavior:"smooth"})}
- else finish();
-};
-function finish(){
- const data={submittedAt:new Date().toISOString(),...answers};
- // Prototype-only local save: responses remain in this browser until central database is connected.
- const list=JSON.parse(localStorage.getItem("blindBoxLabResponses")||"[]");list.push(data);localStorage.setItem("blindBoxLabResponses",JSON.stringify(list));
- const scores={surprise:0,collect:0,plan:0,social:0};
- const joined=JSON.stringify(answers);
- if(/驚喜|碰碰運氣|享受拆盒/.test(joined))scores.surprise++;
- if(/收藏|集齊|湊齊|系列/.test(joined))scores.collect++;
- if(/預算|先了解|設定預算|視情況/.test(joined))scores.plan++;
- if(/朋友|推薦|社群|陪朋友/.test(joined))scores.social++;
- const types=[["surprise","驚喜探索型","你比較重視拆開盲盒時的未知感，享受探索與嘗試的過程。"],["collect","收藏目標型","你可能較在意角色喜好、系列完整度或收藏目標。"],["plan","理性規劃型","你的選擇傾向較重視資訊、預算與事前考量。"],["social","社群共鳴型","朋友、推薦內容或社群話題可能是影響你興趣的因素之一。"]];
- types.sort((a,b)=>scores[b[0]]-scores[a[0]]);
- document.getElementById("typeTitle").textContent=types[0][1];document.getElementById("typeText").textContent=types[0][2];
- document.getElementById("survey").classList.add("hidden");document.getElementById("done").classList.remove("hidden");
-}
-document.getElementById("restart").onclick=()=>{page=0;answers={};document.getElementById("done").classList.add("hidden");document.getElementById("survey").classList.remove("hidden");render()};
+let page=0,answers={};
+const content=document.getElementById("content"),bar=document.getElementById("bar");
+function currentFields(){if(page===1){if(answers.bought==="有，目前仍會購買")return steps[1].current;if(answers.bought==="有，以前會買，但現在不買了")return steps[1].former;return steps[1].never;}return steps[page].fields;}
+function addOption(f,opts,wrap){const holder=document.createElement("div");holder.className=f.style==="cards"?"choice-grid":"options";f.opts.forEach(opt=>{const row=document.createElement("label");row.className="opt";const input=document.createElement("input");input.type=f.type==="check"?"checkbox":"radio";input.name=f.id;input.value=opt;const old=answers[f.id];input.checked=f.type==="check"?(old||[]).includes(opt):old===opt;input.addEventListener("change",()=>{if(f.type==="check"){answers[f.id]=[...holder.querySelectorAll("input:checked")].map(x=>x.value)}else{answers[f.id]=opt;if(f.id==="bought"){delete answers.category;delete answers.frequency;delete answers.budget;delete answers.motivation;delete answers.target;delete answers.duplicate;delete answers.overbudget;delete answers.regret;delete answers.pastCategory;delete answers.pastFrequency;delete answers.stopReason;delete answers.restart;delete answers.pastRegret;delete answers.neverReason;delete answers.intent;delete answers.trigger;}}});const text=document.createElement("span");text.textContent=opt;row.append(input,text);holder.appendChild(row);});wrap.appendChild(holder);}
+function addScale(f,wrap){const holder=document.createElement("div");holder.className="scale";f.opts.forEach(opt=>{const label=document.createElement("label");const input=document.createElement("input");input.type="radio";input.name=f.id;input.value=opt;input.checked=answers[f.id]===opt;input.addEventListener("change",()=>answers[f.id]=opt);const span=document.createElement("span");span.className="scale-text";span.textContent=opt;label.append(input,span);holder.appendChild(label);});wrap.appendChild(holder);}
+function addRange(f,wrap){const box=document.createElement("div");box.className="rangebox";const head=document.createElement("div");head.className="rangehead";const label=document.createElement("span");label.className="small";label.textContent="目前選擇";const value=document.createElement("output");value.className="rangevalue";value.textContent=answers[f.id]===undefined?"請選擇":answers[f.id]+f.unit;head.append(label,value);const input=document.createElement("input");input.type="range";input.min=f.min;input.max=f.max;input.step=f.step;input.value=answers[f.id]??0;input.setAttribute("aria-label",f.q);input.addEventListener("input",()=>{answers[f.id]=Number(input.value);value.textContent=input.value+f.unit;});const ends=document.createElement("div");ends.className="rangescale";ends.innerHTML=`<span>${f.min}${f.unit}</span><span>${f.max}${f.unit}</span>`;box.append(head,input,ends);wrap.appendChild(box);}
+function render(){const s=steps[page],fields=currentFields();document.getElementById("stepLabel").textContent=s.title;document.getElementById("stepCount").textContent=(page+1)+" / "+steps.length;bar.style.width=((page+1)/steps.length*100)+"%";content.innerHTML=`<h2>${s.title}</h2><p class="hint">${s.desc}</p>`;if(page===1){const note=document.createElement("div");note.className="branch-note";note.textContent=answers.bought==="有，目前仍會購買"?"目前仍有購買經驗：請以最近的實際情況作答。":answers.bought==="有，以前會買，但現在不買了"?"過去曾購買：請回想以前的購買經驗。":"從未購買：請依照目前的想法作答。";content.appendChild(note);}fields.forEach(f=>{const wrap=document.createElement("div");wrap.className="field";const label=document.createElement("label");label.className="title";label.textContent=f.q;const req=document.createElement("span");req.className="required";req.textContent="必填";label.appendChild(req);wrap.appendChild(label);if(f.help){const help=document.createElement("p");help.className="subhint";help.textContent=f.help;wrap.appendChild(help);}if(f.type==="range")addRange(f,wrap);else if(["likertAgreement","likertFrequency","frequency"].includes(f.type))addScale(f,wrap);else addOption(f,content,wrap);content.appendChild(wrap);});document.getElementById("back").disabled=page===0;document.getElementById("next").textContent=page===steps.length-1?"完成填答":"下一步";}
+function validate(){for(const f of currentFields()){const a=answers[f.id];if(a===undefined||a===null||a===""||(Array.isArray(a)&&a.length===0)){alert("請完成這一頁的所有題目再繼續喔！");return false;}}return true;}
+document.getElementById("back").onclick=()=>{if(page>0){page--;render();window.scrollTo({top:0,behavior:"smooth"});}};
+document.getElementById("next").onclick=()=>{if(!validate())return;if(page<steps.length-1){page++;render();window.scrollTo({top:0,behavior:"smooth"});}else finish();};
+function finish(){const data={submittedAt:new Date().toISOString(),...answers};try{const list=JSON.parse(localStorage.getItem("blindBoxLabTestResponses")||"[]");list.push(data);localStorage.setItem("blindBoxLabTestResponses",JSON.stringify(list));}catch(e){console.warn("本機測試資料無法儲存",e);}document.getElementById("survey").classList.add("hidden");document.getElementById("done").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+document.getElementById("restart").onclick=()=>{page=0;answers={};document.getElementById("done").classList.add("hidden");document.getElementById("survey").classList.remove("hidden");render();window.scrollTo({top:0,behavior:"smooth"});};
 render();
 </script>
 </body>
