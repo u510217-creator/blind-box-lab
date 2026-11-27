@@ -158,7 +158,7 @@ body{background:radial-gradient(circle at 12% 8%,#f0eafb 0,transparent 30%),radi
       <span class="tag">完成填答</span>
       <h2 style="margin-top:14px">謝謝你參與研究！</h2>
       <div class="result"><div class="small">填答完成</div><h3>你的回答已整理完成</h3><p id="typeText">感謝你提供寶貴意見。這些回答將協助我們了解不同購買經驗者對盲盒的看法。</p></div>
-      <p class="small">目前是網站測試版：答案尚未傳送至研究團隊的共同資料庫。正式公開收件前，必須完成雲端資料庫設定與測試。</p>
+      <p class="small" id="submitStatus">資料正在整理中……</p>
       <button class="btn secondary" id="restart" type="button">重新體驗</button>
     </div>
   </main>
@@ -282,7 +282,51 @@ function render(){const s=steps[page],fields=currentFields();document.getElement
 function validate(){if(steps[page].simulation){if(!sim.stopped&&sim.draws.length>0){alert("請選擇停止抽取，完成這段模擬後再繼續。");return false;}if(sim.draws.length===0&&Number(answers.entertainmentBudget||0)>=DRAW_PRICE){alert("請先開始模擬並完成至少一次選擇。");return false;}return true;}if(steps[page].collection)return true;for(const f of currentFields()){const a=answers[f.id];if(a===undefined||a===null||a===""||(f.type==="number"&&(!Number.isFinite(Number(a))||Number(a)<0||Number(a)>20000||Number(a)%100!==0))||(Array.isArray(a)&&a.length===0)){alert("請完成這一頁的所有題目再繼續喔！");return false;}}return true;}
 document.getElementById("back").onclick=()=>{if(page>0){page--;render();window.scrollTo({top:0,behavior:"smooth"});}};
 document.getElementById("next").onclick=()=>{if(!validate())return;if(page<steps.length-1){if(steps[page].simulation)saveSimResult();page++;render();window.scrollTo({top:0,behavior:"smooth"});}else finish();};
-function finish(){const data={submittedAt:new Date().toISOString(),...answers};try{const list=JSON.parse(localStorage.getItem("blindBoxLabTestResponses")||"[]");list.push(data);localStorage.setItem("blindBoxLabTestResponses",JSON.stringify(list));}catch(e){console.warn("本機測試資料無法儲存",e);}document.getElementById("survey").classList.add("hidden");document.getElementById("done").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+const SHEET_ENDPOINT="https://script.google.com/macros/s/AKfycbxSOzGbD_q1OuP1evmAxOcaC0K3txSz7O6BcQxJZafEqL9ZXaVFzva2jv5olTLN_CvCJw/exec";
+function buildSubmission(data){
+ const simData=data.simulation||{};
+ const col=data.collection||{};
+ const tx=col.transactions||{};
+ const experience=data.bought||"未提供";
+ const budget=Number(simData.budget??data.entertainmentBudget??0);
+ const ratio=Number(simData.willingPct??data.blindBoxWillingPercent??0);
+ const draws=Array.isArray(simData.draws)?simData.draws:[];
+ const inventory=col.inventory||{};
+ return {
+  id:"BB-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,7).toUpperCase(),
+  experience,
+  budget,
+  ratio,
+  plannedAmount:Number(simData.willingAmount??Math.round(budget*ratio/100)),
+  pullCount:Number(simData.drawCount??draws.length),
+  pullCost:Number(simData.spent??draws.length*DRAW_PRICE),
+  wishObtained:simData.gotFavorite?"是":"否",
+  duplicateCount:Number(simData.duplicates??(draws.length-new Set(draws).size)),
+  remainingBudget:Number(simData.remaining??Math.max(0,budget-draws.length*DRAW_PRICE)),
+  secondhandCost:Number(col.spentSecondhand??0),
+  resaleIncome:Number(col.resaleIncome??0),
+  tradeCount:Array.isArray(tx.exchanges)?tx.exchanges.length:0,
+  giftCount:Array.isArray(tx.gifts)?tx.gifts.length:0,
+  collectionCount:Object.values(inventory).reduce((sum,n)=>sum+Number(n||0),0),
+  netCost:Number(col.netSpending??((col.spentDraw||draws.length*DRAW_PRICE)+(col.spentSecondhand||0)-(col.resaleIncome||0)))
+ };
+}
+async function sendToSheet(payload){
+ try{
+  await fetch(SHEET_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(payload)});
+  return "已發出資料傳送請求。因 Google Apps Script 的跨來源限制，網頁無法確認伺服器是否成功寫入；研究者仍需核對試算表。";
+ }catch(err){
+  return "資料傳送失敗（可能是網路問題）。本機仍保留填答資料，請稍後再試或通知研究團隊。";
+ }
+}
+async function finish(){
+ const data={submittedAt:new Date().toISOString(),...answers};
+ try{const list=JSON.parse(localStorage.getItem("blindBoxLabTestResponses")||"[]");list.push(data);localStorage.setItem("blindBoxLabTestResponses",JSON.stringify(list));}catch(e){console.warn("本機資料儲存失敗",e);}
+ document.getElementById("survey").classList.add("hidden");document.getElementById("done").classList.remove("hidden");
+ const status=document.getElementById("submitStatus");status.textContent="資料傳送中……";
+ const payload=buildSubmission(data); status.textContent=await sendToSheet(payload);
+ window.scrollTo({top:0,behavior:"smooth"});
+}
 document.getElementById("restart").onclick=()=>{page=0;answers={};sim={favorite:"A",draws:[],stopped:false};marketState=null;document.getElementById("done").classList.add("hidden");document.getElementById("survey").classList.remove("hidden");render();window.scrollTo({top:0,behavior:"smooth"});};
 render();
 </script>
