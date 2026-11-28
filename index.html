@@ -272,19 +272,21 @@ function renderSimulation(){
  const grid=document.createElement("div");grid.className="choice-grid";
  Object.entries(figures).forEach(([key,name])=>{const lab=document.createElement("label");lab.className="opt";const radio=document.createElement("input");radio.type="radio";radio.name="simFavorite";radio.value=key;radio.checked=sim.favorite===key;radio.disabled=sim.draws.length>0||sim.stopped;radio.addEventListener("change",()=>{sim.favorite=key;render();});const img=document.createElement("img");img.src=artSrc(key);img.alt="";const span=document.createElement("span");span.textContent=`${key}｜${name}${key==="M"?"（隱藏款）":""}`;lab.append(radio,img,span);grid.append(lab);});fav.append(grid);content.append(fav);
  const status=document.createElement("div");status.className="branch-note";status.textContent=`目前已抽 ${sim.draws.length} 次｜已花費 ${spent} 元｜剩餘預算 ${remaining} 元`;content.append(status);
- if(sim.draws.length===0&&!sim.stopped){const b=document.createElement("button");b.className="btn primary";b.type="button";b.textContent="開始拆盲盒";b.onclick=()=>performDraw();content.append(b);}
+ // 動畫與抽取結果固定共用同一個展示位置；每次重新 render 都不會把動畫推到其他區塊。
+ const display=document.createElement("div");display.id="drawDisplay";
  if(sim.animating){
    const animation=document.createElement("div");animation.className="draw-box";
    animation.innerHTML='<div class="small">正在開啟盲盒</div><div class="opening-stage"><div><div class="giftbox-art" aria-hidden="true"><i></i><b></b></div><div>正在開盒……</div></div></div>';
-   content.append(animation);
- }
- if(sim.draws.length>0&&!sim.animating){
+   display.append(animation);
+ }else if(sim.draws.length>0){
    const last=sim.draws[sim.draws.length-1];const reveal=document.createElement("div");reveal.className="draw-box is-reveal";
-   reveal.innerHTML=`<div class="small">第 ${sim.draws.length} 次抽取結果</div>${artImg(last,"reveal-art")}<h3>${figures[last]}${last==="M"?"｜隱藏款":""}</h3><p>${last===sim.favorite?"恭喜！這次抽中心願款。":"這次沒有抽中心願款。"}</p>`;content.append(reveal);
+   reveal.innerHTML=`<div class="small">第 ${sim.draws.length} 次抽取結果</div>${artImg(last,"reveal-art")}<h3>${figures[last]}${last==="M"?"｜隱藏款":""}</h3><p>${last===sim.favorite?"恭喜！這次抽中心願款。":"這次沒有抽中心願款。"}</p>`;display.append(reveal);
  }
+ content.append(display);
+ if(sim.draws.length===0&&!sim.stopped){const b=document.createElement("button");b.className="btn primary";b.type="button";b.textContent=sim.animating?"正在開盒……":"開始拆盲盒";b.disabled=sim.animating;b.onclick=()=>performDraw();content.append(b);}
  if(sim.draws.length>0){
    if(!sim.stopped){const actions=document.createElement("div");actions.className="actions";
-     const stop=document.createElement("button");stop.className="btn secondary";stop.type="button";stop.textContent="停止抽取";stop.onclick=()=>{sim.stopped=true;saveSimResult();render();};actions.append(stop);
+     const stop=document.createElement("button");stop.className="btn secondary";stop.type="button";stop.textContent="停止抽取";stop.disabled=sim.animating;stop.onclick=()=>{sim.stopped=true;saveSimResult();render();};actions.append(stop);
      const go=document.createElement("button");go.className="btn primary";go.type="button";go.textContent="再抽一次（100 元）";go.disabled=sim.animating||remaining<DRAW_PRICE||sim.draws.length>=maxDraws||sim.draws.length>=drawSequence.length;
      go.onclick=()=>performDraw().then(()=>{if(sim.draws.length>=maxDraws||sim.draws.length>=drawSequence.length){sim.stopped=true;saveSimResult();render();}});actions.append(go);content.append(actions);
      if(go.disabled&&!sim.animating){const tip=document.createElement("p");tip.className="small";tip.textContent="可用預算已不足以再抽，或已達本次模擬上限。";content.append(tip);}
@@ -405,9 +407,9 @@ function showResultCard(data){
  const result=makeResult(data),sim=data.simulation||{},col=data.collection||{};
  document.getElementById("typeText").textContent="你的互動結果卡已生成。結果綜合問卷回答與模擬中的選擇，僅供娛樂與研究參考。";
  const host=document.getElementById("resultCardHost");
- host.innerHTML=`<section class="result-card" id="shareCard"><div class="kicker">YOUR BLIND BOX PROFILE</div><div class="small">本次互動結果</div><h2 class="result-title">${result.main.id}</h2><p>${result.desc}</p><div class="result-tags">${result.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div><div class="result-stats"><div class="result-stat"><strong>${result.stats.draws}</strong><span>抽取次數</span></div><div class="result-stat"><strong>${result.stats.spent.toLocaleString("zh-TW")}</strong><span>抽盒花費（元）</span></div><div class="result-stat"><strong>${result.stats.unique}</strong><span>收藏款式數</span></div></div><p class="small">${result.stats.wish}｜最終淨支出 ${result.stats.net.toLocaleString("zh-TW")} 元</p><p class="small">本結果僅供娛樂與研究參考，不代表個人真實性格或消費傾向。</p><div class="small">BLIND BOX LAB · 自主學習研究</div></section><div class="card-actions"><button class="btn primary" id="previewCard" type="button">預覽結果卡</button><button class="btn secondary" id="shareResult" type="button">分享／儲存到照片</button></div>`;
+ host.innerHTML=`<section class="result-card" id="shareCard"><div class="kicker">YOUR BLIND BOX PROFILE</div><div class="small">本次互動結果</div><h2 class="result-title">${result.main.id}</h2><p>${result.desc}</p><div class="result-tags">${result.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div><div class="result-stats"><div class="result-stat"><strong>${result.stats.draws}</strong><span>抽取次數</span></div><div class="result-stat"><strong>${result.stats.spent.toLocaleString("zh-TW")}</strong><span>抽盒花費（元）</span></div><div class="result-stat"><strong>${result.stats.unique}</strong><span>收藏款式數</span></div></div><p class="small">${result.stats.wish}｜最終淨支出 ${result.stats.net.toLocaleString("zh-TW")} 元</p><p class="small">本結果僅供娛樂與研究參考，不代表個人真實性格或消費傾向。</p><div class="small">BLIND BOX LAB · 自主學習研究</div></section><p class="small">上方是結果摘要；想看可儲存的完整圖片，請按下方「查看結果圖片」。</p><div class="card-actions"><button class="btn primary" id="previewCard" type="button">查看結果圖片（預覽）</button></div>`;
  document.getElementById("previewCard").onclick=()=>previewResultCard(result);
- document.getElementById("shareResult").onclick=()=>shareResultCard(result);
+
 }
 function drawWrapped(ctx,text,x,y,maxWidth,lineHeight){const words=[...text];let line="",lines=[];for(const ch of words){if(ctx.measureText(line+ch).width>maxWidth&&line){lines.push(line);line=ch;}else line+=ch;}if(line)lines.push(line);lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));return y+lines.length*lineHeight;}
 function buildCardCanvas(result){
@@ -423,12 +425,13 @@ function buildCardCanvas(result){
  y+=250;x.fillStyle="#555967";x.font="30px sans-serif";x.fillText(result.stats.wish,88,y);x.fillText("最終淨支出："+result.stats.net.toLocaleString("zh-TW")+" 元",88,y+58);
  x.fillStyle="#85838a";x.font="23px sans-serif";drawWrapped(x,"本結果僅供娛樂與研究參考，不代表個人真實性格或消費傾向。",88,1190,900,38);x.fillText("BLIND BOX LAB · 自主學習研究",88,1260);return c;
 }
-async function cardBlob(result){const c=buildCardCanvas(result);return await new Promise(resolve=>c.toBlob(resolve,"image/png"));}
+async function cardBlob(result){const c=buildCardCanvas(result);return await new Promise((resolve,reject)=>{try{c.toBlob(blob=>blob?resolve(blob):reject(new Error("無法產生圖片")),"image/png");}catch(e){reject(e);}});}
 async function previewResultCard(result){
  const blob=await cardBlob(result);const url=URL.createObjectURL(blob);
- let modal=document.getElementById("cardPreviewModal");if(!modal){modal=document.createElement("div");modal.id="cardPreviewModal";modal.className="preview-modal";modal.innerHTML='<div class="preview-sheet"><div class="preview-head"><strong>結果卡預覽</strong><button type="button" class="btn secondary" id="closePreview">關閉</button></div><img id="previewImage" alt="盲盒研究所互動結果卡預覽"><p class="small">iPhone／iPad：點「分享／儲存到照片」，再於分享選單選擇「儲存影像」；也可以長按圖片儲存。</p><div class="card-actions"><button class="btn primary" id="savePreview" type="button">分享／儲存到照片</button><button class="btn secondary" id="downloadPreview" type="button">下載 PNG</button></div></div>' ;document.body.append(modal);}
+ let modal=document.getElementById("cardPreviewModal");if(!modal){modal=document.createElement("div");modal.id="cardPreviewModal";modal.className="preview-modal";modal.innerHTML='<div class="preview-sheet"><div class="preview-head"><strong>結果圖片預覽</strong><button type="button" class="btn secondary" id="closePreview">關閉</button></div><img id="previewImage" alt="盲盒研究所互動結果卡預覽"><p class="small">這就是可以保存的完整結果圖片。iPhone／iPad 請按「分享／存入照片」，再選「儲存影像」或「儲存到照片」。</p><div class="card-actions"><button class="btn primary" id="savePreview" type="button">分享／存入照片</button><button class="btn secondary" id="downloadPreview" type="button">下載 PNG</button></div></div>' ;document.body.append(modal);}
  const image=document.getElementById("previewImage");if(image.dataset.url)URL.revokeObjectURL(image.dataset.url);image.src=url;image.dataset.url=url;modal.classList.add("show");
  document.getElementById("closePreview").onclick=()=>modal.classList.remove("show");
+ modal.onclick=(event)=>{if(event.target===modal)modal.classList.remove("show");};
  document.getElementById("savePreview").onclick=()=>shareBlob(blob);
  document.getElementById("downloadPreview").onclick=()=>downloadBlob(blob);
 }
